@@ -17,9 +17,14 @@ const playfair = Playfair_Display({
 });
 
 // 2. SEO Metadata (Standard Export)
+// src/app/layout.tsx
+
 export const metadata: Metadata = {
-  title: "Digify | Digital Product Design & SaaS Development",
+  title: "Digify | Digital Product Design & SaaS Development Agency",
   description: "Accelerating digital growth through precision design.",
+  verification: {
+    google: "google0a488f45af830b1f", // Example: "0a488f45af830b1f..."
+  },
 };
 
 // 3. THE FIX: Add "default" to this function
