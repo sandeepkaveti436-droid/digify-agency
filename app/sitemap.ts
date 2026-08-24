@@ -1,19 +1,21 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Use your current live domain
+  const baseUrl = "https://digify-agency.vercel.app";
+
   return [
     {
-      url: "https://www.digify.agency",
+      url: `${baseUrl}`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://www.digify.agency/contact",
+      url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    // Add other pages like /works, /about as you create them
   ];
 }
