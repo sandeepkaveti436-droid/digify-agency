@@ -24,7 +24,7 @@ const blurSlip = {
     transition: {
       delay: i * 0.1,
       duration: 1,
-      ease: [0.19, 1, 0.22, 1],
+      ease: [0.19, 1, 0.22, 1] as const,
     },
   }),
 };

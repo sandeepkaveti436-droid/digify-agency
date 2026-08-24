@@ -6,7 +6,6 @@ import TestimonialSection from "@/src/components/TestimonialSection";
 import ProcessSection from "@/src/components/ProcessSection";
 import FAQSection from "@/src/components/FAQSection";
 import Footer from "@/src/components/Footer"; 
-import Image from "next/image"
 
 export default function Home() {
   return (

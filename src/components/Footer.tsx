@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Copy, Check } from "lucide-react";
 import ActionButton from "@/src/components/ActionButton";
 
@@ -137,6 +138,7 @@ const footerLinks = {
 
 export default function Footer() {
   const [copied, setCopy] = useState(false);
+  const router = useRouter();
   const email = "hello@digify.agency";
 
   const handleCopy = () => {
@@ -173,7 +175,7 @@ export default function Footer() {
             {/* Reusable Action Button Component */}
             <ActionButton
               label="Let's Build"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => router.push("/contact")}
             />
           </div>
         </div>
