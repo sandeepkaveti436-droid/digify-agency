@@ -139,7 +139,7 @@ const footerLinks = {
 export default function Footer() {
   const [copied, setCopy] = useState(false);
   const router = useRouter();
-  const email = "hello@digify.agency";
+  const email = "info.digifyagency@gmail.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -200,9 +200,9 @@ export default function Footer() {
               </h4>
               <div
                 onClick={handleCopy}
-                className="group flex items-center gap-3 cursor-pointer select-none"
+                className="group flex items-center gap-1 cursor-pointer select-none"
               >
-                <span className="text-[24px] text-[#057fa5] md:text-2xl font-bold hover:text-[#057fa5] transition-colors break-all">
+                <span className="text-[16px] text-[#057fa5] md:text-[18px] font-medium hover:text-[#057fa5] transition-colors break-all">
                   {email}
                 </span>
                 <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#057fa5]/10 transition-all border border-white/5 group-hover:border-[#2563EB]/20">
