@@ -65,8 +65,7 @@ export default function AboutSection() {
               className="text-[32px] md:text-[32px] font-extrabold text-[#0B1120] leading-[1.1] tracking-tight"
             >
               We are a creative <br />
-              collective that 
-              accelerates{" "} <br />
+              collective that accelerates <br />
               <span className="font-serif italic font-light text-[#057fa5]">
                 growth
               </span>

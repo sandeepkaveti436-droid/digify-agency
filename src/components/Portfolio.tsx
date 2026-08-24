@@ -147,7 +147,10 @@ export default function PremiumPortfolio() {
       {/* 3. DESKTOP VIEW: Cinematic Horizontal */}
       <div ref={targetRef} className="hidden lg:block relative h-[300vh]">
         <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div style={{ x }} className="flex items-end gap-12 mb-40 px-12">
+          <motion.div
+            style={{ x }}
+            className="flex items-end gap-12 mb-40 px-12"
+          >
             {projects.map((project, idx) => (
               <div key={idx} className="relative shrink-0 w-[30vw] group">
                 <div className="relative aspect-[10/6] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100">
