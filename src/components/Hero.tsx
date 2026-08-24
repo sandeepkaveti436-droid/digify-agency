@@ -13,14 +13,14 @@ export default function Hero() {
       {/* 1. IMMERSIVE BACKGROUND IMAGE */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2000&auto=format&fit=crop"
+          src="/img-2.png"
           alt="Professional working"
           fill
           priority
           className="object-cover object-center"
         />
         {/* Dark Overlay to make text pop - matching the reference style */}
-        <div className="absolute inset-0 bg-black/40 backdrop-brightness-75" />
+        <div className="absolute inset-0 bg-black/20 backdrop-brightness-75" />
         {/* Subtle Brand Glow Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#011425]/40 to-[#011425]" />
       </div>
@@ -37,15 +37,15 @@ export default function Hero() {
         <h1 className="text-[32px] md:text-[64px] font-extrabold leading-[1.15] tracking-tight text-white">
           Your design & dev partner that <br className="hidden md:block" />
           unites{" "}
-          <span className="font-serif italic glass-pill mx-1 text-white bg-white/10 border-white/20">
+          <span className="font-serif italic glass-pill mx-1 text-white bg-[#057fa5]">
             brand
           </span>
           <span className="text-white/60 mx-1">,</span>
-          <span className="font-serif italic glass-pill mx-2 text-white bg-white/10 border-white/20">
+          <span className="font-serif italic glass-pill mx-2 text-white bg-[#057fa5] border-white/20">
             website
           </span>
           <span className="text-white/60 mx-1">,</span>
-          <span className="font-serif italic glass-pill mx-1 text-white bg-white/10 border-white/20">
+          <span className="font-serif italic glass-pill mx-1 text-white bg-[#057fa5] border-white/20">
             ui/ux design
           </span>
           <div className="flex items-center justify-center flex-wrap gap-6 mt-8">
