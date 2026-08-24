@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // Added Variants type
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 
 const blogPosts = [
@@ -12,7 +12,7 @@ const blogPosts = [
     date: "Oct 12, 2024",
     readTime: "5 min read",
     image:
-      "https://images.unsplash.com/photo-1551288049-bbbda5165867?q=80&w=1000",
+      "/img-1.png",
     featured: true,
   },
   {
@@ -37,7 +37,8 @@ const blogPosts = [
   },
 ];
 
-const blurSlip = {
+// FIXED: Added 'as const' to the ease array to satisfy TypeScript
+const blurSlip: Variants = {
   hidden: { filter: "blur(12px)", opacity: 0, y: 20 },
   visible: (i: number) => ({
     filter: "blur(0px)",
@@ -46,7 +47,7 @@ const blurSlip = {
     transition: {
       delay: i * 0.1,
       duration: 0.8,
-      ease: [0.21, 0.47, 0.32, 0.98],
+      ease: [0.21, 0.47, 0.32, 0.98] as const, // The 'as const' fix
     },
   }),
 };

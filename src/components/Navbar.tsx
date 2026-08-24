@@ -29,7 +29,7 @@ import {
   Cpu,
 } from "lucide-react";
 
-// --- 1. DATA OBJECTS (Must be defined before the component) ---
+// --- 1. DATA STRUCTURES ---
 
 const servicesData = {
   branding: [
@@ -113,34 +113,39 @@ const industriesData = [
     desc: "Crypto, DeFi, DEX, CEX, NFT",
     icon: <Binary />,
     color: "text-blue-500",
+    bg: "bg-blue-50",
   },
   {
     title: "Fintech",
     desc: "Banking, Digital Payments, Exchanges",
     icon: <Landmark />,
     color: "text-purple-500",
+    bg: "bg-purple-50",
   },
   {
     title: "SaaS",
     desc: "CRM, HR, AI, ERP, Automation tools",
     icon: <Cloud />,
     color: "text-cyan-500",
+    bg: "bg-cyan-50",
   },
   {
     title: "Healthcare & Wellness",
     desc: "Mental health, Insurance, Fitness",
     icon: <Activity />,
     color: "text-indigo-500",
+    bg: "bg-indigo-50",
   },
   {
     title: "AI & ML",
     desc: "Analysing tools, Chatbots, Crypto",
     icon: <Cpu />,
     color: "text-violet-500",
+    bg: "bg-violet-50",
   },
 ];
 
-// --- 2. HELPER SUB-COMPONENT ---
+// --- 2. SUB-COMPONENTS ---
 
 function MenuCard({
   title,
@@ -148,11 +153,12 @@ function MenuCard({
   icon,
   iconColor = "text-[#057fa5]",
   size = "large",
+  bg = "bg-gray-50",
 }: any) {
   return (
-    <Link href="#" className="flex items-start gap-5 group/item">
+    <Link href="#" className="flex items-start gap-5 group/item py-2">
       <div
-        className={`shrink-0 rounded-2xl bg-gray-50 flex items-center justify-center transition-all duration-300 group-hover/item:bg-white group-hover/item:shadow-xl ${size === "large" ? "w-14 h-14" : "w-10 h-10"}`}
+        className={`shrink-0 rounded-2xl ${bg} flex items-center justify-center transition-all duration-300 group-hover/item:bg-white group-hover/item:shadow-xl ${size === "large" ? "w-14 h-14" : "w-10 h-10"}`}
       >
         {React.cloneElement(icon, {
           className: `${iconColor} transition-transform group-hover/item:scale-110`,
@@ -171,7 +177,7 @@ function MenuCard({
   );
 }
 
-// --- 3. MAIN NAVBAR COMPONENT ---
+// --- 3. MAIN COMPONENT ---
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<
@@ -179,19 +185,26 @@ export default function Navbar() {
   >(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+  // Define easing with 'as const' to fix TypeScript error
   const blurSlip = {
     hidden: { opacity: 0, y: 15, filter: "blur(10px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] },
+      transition: {
+        duration: 0.5,
+        ease: [0.21, 0.47, 0.32, 0.98] as const,
+      },
     },
     exit: {
       opacity: 0,
       y: 10,
       filter: "blur(10px)",
-      transition: { duration: 0.3 },
+      transition: {
+        duration: 0.3,
+        ease: [0.21, 0.47, 0.32, 0.98] as const,
+      },
     },
   };
 
@@ -200,6 +213,7 @@ export default function Navbar() {
       onMouseLeave={() => setActiveMenu(null)}
       className="bg-white w-full py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-[100] border-b border-gray-100 font-manrope"
     >
+      {/* LOGO */}
       <Link href="/">
         <Image
           src="/logo/DA.png"
@@ -220,27 +234,25 @@ export default function Navbar() {
           Works
         </Link>
 
-        {/* Services Link (Screenshot 2 style) */}
         <button
           onMouseEnter={() => setActiveMenu("services")}
           className={`flex items-center gap-1.5 font-semibold text-[15px] transition-colors ${activeMenu === "services" ? "text-[#057fa5]" : "text-[#011425]"}`}
         >
-          Services{" "}
+          Services
           <ChevronDown
             size={14}
-            className={activeMenu === "services" ? "rotate-180" : ""}
+            className={`transition-transform duration-300 ${activeMenu === "services" ? "rotate-180" : ""}`}
           />
         </button>
 
-        {/* Industries Link (Screenshot 1 style) */}
         <button
           onMouseEnter={() => setActiveMenu("industries")}
           className={`flex items-center gap-1.5 font-semibold text-[15px] transition-colors ${activeMenu === "industries" ? "text-[#057fa5]" : "text-[#011425]"}`}
         >
-          Industries{" "}
+          Industries
           <ChevronDown
             size={14}
-            className={activeMenu === "industries" ? "rotate-180" : ""}
+            className={`transition-transform duration-300 ${activeMenu === "industries" ? "rotate-180" : ""}`}
           />
         </button>
 
@@ -278,14 +290,14 @@ export default function Navbar() {
           </div>
         </Link>
         <button
-          className="lg:hidden"
+          className="lg:hidden text-[#011425]"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
           {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* MEGA MENUS */}
+      {/* MEGA MENUS DESKTOP */}
       <AnimatePresence>
         {activeMenu && (
           <motion.div
@@ -296,54 +308,61 @@ export default function Navbar() {
             className="absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-2xl overflow-hidden"
           >
             <div className="max-w-7xl mx-auto py-12 px-12">
-              {/* --- 1. INDUSTRIES (2 Cols, Large Icons) --- */}
+              {/* --- INDUSTRIES (2 Cols, Large Icons) --- */}
               {activeMenu === "industries" && (
-                <div className="grid grid-cols-12 gap-8">
-                  <div className="col-span-2 text-xs font-black uppercase tracking-[0.3em] text-[#011425]">
+                <div className="grid grid-cols-12 gap-8 items-start">
+                  <div className="col-span-2 text-xs font-black uppercase tracking-[0.3em] text-[#011425] pt-4">
                     Industries
                   </div>
                   <div className="col-span-10 grid grid-cols-2 gap-x-20 gap-y-10">
                     {industriesData.map((item, i) => (
-                      <MenuCard key={i} {...item} iconColor={item.color} />
+                      <MenuCard
+                        key={i}
+                        {...item}
+                        iconColor={item.color}
+                        bg={item.bg}
+                      />
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* --- 2. SERVICES (3 Cols, Vertical Pill) --- */}
+              {/* --- SERVICES (3 Cols, Vertical Pill) --- */}
               {activeMenu === "services" && (
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-12 gap-8 items-start">
                   <div className="col-span-1">
-                    <span className="bg-[#4ed0d8] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
-                      Services
-                    </span>
+                    <div className="h-24 w-10 bg-[#4ed0d8] flex items-center justify-center rounded-full">
+                      <span className="text-white text-[10px] font-black uppercase tracking-[0.3em] -rotate-90 whitespace-nowrap">
+                        Services
+                      </span>
+                    </div>
                   </div>
                   <div className="col-span-11 grid grid-cols-3 gap-12">
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
+                      <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
                         Branding
                       </h3>
-                      <div className="space-y-6">
+                      <div className="space-y-4">
                         {servicesData.branding.map((s, i) => (
                           <MenuCard key={i} {...s} size="small" />
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
+                      <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
                         Design
                       </h3>
-                      <div className="space-y-6">
+                      <div className="space-y-4">
                         {servicesData.design.map((s, i) => (
                           <MenuCard key={i} {...s} size="small" />
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
+                      <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 mb-8">
                         Development
                       </h3>
-                      <div className="space-y-6">
+                      <div className="space-y-4">
                         {servicesData.development.map((s, i) => (
                           <MenuCard key={i} {...s} size="small" />
                         ))}
@@ -352,6 +371,56 @@ export default function Navbar() {
                   </div>
                 </div>
               )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* MOBILE MENU OVERLAY */}
+      <AnimatePresence>
+        {isMobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            className="fixed inset-0 top-[73px] bg-white z-[90] flex flex-col p-8 lg:hidden"
+          >
+            <div className="flex flex-col gap-6 overflow-y-auto pb-20">
+              <Link href="#" className="text-2xl font-bold text-[#011425]">
+                Works
+              </Link>
+              <div className="border-t border-gray-100 pt-6">
+                <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">
+                  Services
+                </p>
+                <div className="grid grid-cols-1 gap-4">
+                  {servicesData.branding.slice(0, 3).map((s, i) => (
+                    <Link key={i} href="#" className="font-bold text-[#011425]">
+                      {s.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <Link href="#" className="text-2xl font-bold text-[#011425]">
+                Industries
+              </Link>
+              <Link href="#" className="text-2xl font-bold text-[#011425]">
+                Pricing
+              </Link>
+              <Link href="#" className="text-2xl font-bold text-[#011425]">
+                About
+              </Link>
+              <Link href="#" className="text-2xl font-bold text-[#011425]">
+                Blog
+              </Link>
+
+              <Link
+                href="/contact"
+                onClick={() => setIsMobileOpen(false)}
+                className="bg-[#057fa5] text-white text-center py-4 rounded-full font-bold mt-10"
+              >
+                Contact Us
+              </Link>
             </div>
           </motion.div>
         )}

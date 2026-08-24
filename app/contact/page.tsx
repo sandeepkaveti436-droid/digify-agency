@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import {
   User,
   Mail,
@@ -13,8 +13,9 @@ import {
   Zap,
 } from "lucide-react";
 
-// Professional Blur Slip Variants
-const blurSlipVariants = {
+// --- 1. ANIMATION VARIANTS (FIXED FOR TYPESCRIPT) ---
+
+const blurSlipVariants: Variants = {
   hidden: {
     filter: "blur(12px)",
     opacity: 0,
@@ -25,9 +26,10 @@ const blurSlipVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.1, // Stagger effect
+      delay: i * 0.1,
       duration: 0.8,
-      ease: [0.21, 0.47, 0.32, 0.98], // Premium cubic-bezier
+      // Added "as const" to fix the Easing type error
+      ease: [0.21, 0.47, 0.32, 0.98] as const,
     },
   }),
 };
@@ -66,7 +68,7 @@ export default function AgencyContactPage() {
           </motion.div>
         </section>
 
-        {/* 3. PINCH DIVIDER */}
+        {/* 3. PINCH DIVIDER (Desktop Only) */}
         <div className="hidden lg:block absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none">
           <div className="relative flex items-center justify-center">
             <svg
@@ -153,7 +155,7 @@ export default function AgencyContactPage() {
                     }}
                     className="space-y-6"
                   >
-                    {/* Input Row 1 */}
+                    {/* Row 1 */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <motion.div
                         custom={2}
@@ -203,7 +205,7 @@ export default function AgencyContactPage() {
                       </motion.div>
                     </div>
 
-                    {/* Input Row 2 */}
+                    {/* Row 2 */}
                     <motion.div
                       custom={4}
                       initial="hidden"
@@ -231,7 +233,7 @@ export default function AgencyContactPage() {
                       </div>
                     </motion.div>
 
-                    {/* Input Row 3 */}
+                    {/* Row 3 */}
                     <motion.div
                       custom={5}
                       initial="hidden"
@@ -255,7 +257,7 @@ export default function AgencyContactPage() {
                       </div>
                     </motion.div>
 
-                    {/* Submit Button with Blur Slip */}
+                    {/* Submit Button */}
                     <motion.div
                       custom={6}
                       initial="hidden"
@@ -264,7 +266,7 @@ export default function AgencyContactPage() {
                     >
                       <button
                         type="submit"
-                        className="w-full group h-16 bg-[#057fa5] hover:bg-black rounded-2xl flex items-center justify-between px-8 transition-all duration-300 shadow-lg shadow-[#057fa5]/10"
+                        className="w-full group h-16 bg-[#057fa5] hover:bg-black text-white rounded-2xl flex items-center justify-between px-8 transition-all duration-300"
                       >
                         <span className="text-white font-black text-lg">
                           Send Inquiry
@@ -303,7 +305,6 @@ export default function AgencyContactPage() {
           outline: none;
           border-color: #057fa5;
           background-color: white;
-          box-shadow: 0 10px 15px -3px rgba(5, 127, 165, 0.1);
         }
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
