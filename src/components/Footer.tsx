@@ -9,7 +9,7 @@ import ActionButton from "@/src/components/ActionButton";
 const SocialIcons = [
   {
     name: "LinkedIn",
-    href: "#",
+    href: "#", // Add your LinkedIn link here
     svg: (
       <svg
         viewBox="0 0 24 24"
@@ -29,7 +29,7 @@ const SocialIcons = [
   },
   {
     name: "Twitter",
-    href: "#",
+    href: "#", // Add your Twitter link here
     svg: (
       <svg
         viewBox="0 0 24 24"
@@ -47,7 +47,8 @@ const SocialIcons = [
   },
   {
     name: "Instagram",
-    href: "#",
+    // LINK UPDATED BELOW
+    href: "https://www.instagram.com/info.digifyagency?igsi=ZjhpMmozaGt6bmF3",
     svg: (
       <svg
         viewBox="0 0 24 24"
@@ -67,7 +68,7 @@ const SocialIcons = [
   },
   {
     name: "Github",
-    href: "#",
+    href: "#", // Add your Github link here
     svg: (
       <svg
         viewBox="0 0 24 24"
@@ -116,20 +117,6 @@ const footerLinks = {
       "Performance Ops",
     ],
   },
-  solutions: {
-    title: "Core Solutions",
-    links: ["Scale Strategy", "Digital Refresh", "Team Augmentation"],
-  },
-  industries: {
-    title: "Focused Sectors",
-    links: [
-      "Fintech & Pay",
-      "AI & Automation",
-      "E-Commerce",
-      "SaaS",
-      "Blockchain",
-    ],
-  },
   company: {
     title: "Digify",
     links: ["Our Work", "Our Story", "Insights", "Join Team", "Get in touch"],
@@ -148,13 +135,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#ececec]/20 text-white pt-24 pb-10 px-6 md:px-12 lg:px-24 relative overflow-hidden font-manrope">
-      {/* Subtle Blue Mesh Glow (Brand Identity) */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#ececec]/5 blur-[140px] rounded-full -mr-48 -mt-48 pointer-events-none" />
-
+    <footer className="bg-[#f8f9fa] border-t border-gray-100 text-[#011425] pt-24 pb-10 px-6 md:px-12 lg:px-24 relative overflow-hidden font-manrope">
       <div className="max-w-7xl mx-auto">
         {/* 1. BRAND TOP BAR */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 mb-20 border-b border-white/5 pb-16">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12 mb-20 border-b border-gray-200 pb-16">
           <div className="space-y-6">
             <Link
               href="/"
@@ -162,7 +146,7 @@ export default function Footer() {
             >
               Digify<span className="text-[#057fa5]">.</span>
             </Link>
-            <p className="text-gray-400 max-w-sm text-lg font-medium leading-relaxed">
+            <p className="text-gray-500 max-w-sm text-lg font-medium leading-relaxed">
               Accelerating digital growth through precision design and
               high-performance engineering.
             </p>
@@ -172,7 +156,6 @@ export default function Footer() {
             <span className="text-[12px] font-black uppercase tracking-[0.4em] text-[#057fa5]">
               Start your evolution
             </span>
-            {/* Reusable Action Button Component */}
             <ActionButton
               label="Let's Build"
               onClick={() => router.push("/contact")}
@@ -182,15 +165,13 @@ export default function Footer() {
 
         {/* 2. NAVIGATION GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
-          {/* Company Contacts */}
           <div className="lg:col-span-3 space-y-16">
             <div className="space-y-4">
               <h4 className="text-[12px] font-black uppercase tracking-[0.3em] text-[#057fa5]">
                 Headquarters
               </h4>
-              <p className="text-gray-400 text-[16px] leading-relaxed font-medium">
-                London, United Kingdom <br />
-                24-28 St Leonards Rd
+              <p className="text-gray-500 text-[16px] leading-relaxed font-medium">
+                London, United Kingdom <br /> 24-28 St Leonards Rd
               </p>
             </div>
 
@@ -202,14 +183,17 @@ export default function Footer() {
                 onClick={handleCopy}
                 className="group flex items-center gap-1 cursor-pointer select-none"
               >
-                <span className="text-[16px] text-[#057fa5] md:text-[18px] font-medium hover:text-[#057fa5] transition-colors break-all">
+                <span className="text-[16px] text-[#057fa5] md:text-[18px] font-bold hover:text-[#011425] transition-colors break-all">
                   {email}
                 </span>
-                <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#057fa5]/10 transition-all border border-white/5 group-hover:border-[#2563EB]/20">
+                <div className="w-9 h-9 rounded-full bg-[#057fa5]/5 flex items-center justify-center group-hover:bg-[#057fa5] transition-all">
                   {copied ? (
-                    <Check size={16} className="text-[#057fa5]" />
+                    <Check size={16} className="text-green-600" />
                   ) : (
-                    <Copy size={16} className="text-gray-400" />
+                    <Copy
+                      size={16}
+                      className="text-[#057fa5] group-hover:text-white"
+                    />
                   )}
                 </div>
               </div>
@@ -217,7 +201,7 @@ export default function Footer() {
           </div>
 
           {/* Sitemaps */}
-          <div className="lg:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-y-16 gap-x-6">
+          <div className="lg:col-span-9 grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-6">
             {Object.entries(footerLinks).map(([key, section]) => (
               <div key={key} className="space-y-7">
                 <h4 className="text-[12px] font-black uppercase tracking-[0.3em] text-[#057fa5] border-l-2 border-[#057fa5] pl-4">
@@ -228,7 +212,7 @@ export default function Footer() {
                     <li key={link}>
                       <Link
                         href="#"
-                        className="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 text-[16px] font-medium block"
+                        className="text-gray-500 hover:text-[#057fa5] hover:pl-2 transition-all duration-300 text-[16px] font-medium block"
                       >
                         {link}
                       </Link>
@@ -241,12 +225,12 @@ export default function Footer() {
         </div>
 
         {/* 3. LEGAL & SOCIALS */}
-        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10 text-gray-500">
-          <div className="flex flex-col items-center md:items-start gap-2">
+        <div className="pt-10 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-10 text-gray-500">
+          <div className="flex flex-col items-center md:items-start gap-1">
             <p className="text-[14px] font-medium text-[#057fa5]">
-              © {new Date().getFullYear()} Digital Agency. | Sandeep Kaveti
+              © {new Date().getFullYear()} Digify Agency. | Sandeep Kaveti
             </p>
-            <p className="text-[12px] uppercase text-[#011425] tracking-widest opacity-90">
+            <p className="text-[10px] uppercase text-gray-400 tracking-widest">
               Crafted with precision.
             </p>
           </div>
@@ -256,7 +240,9 @@ export default function Footer() {
               <Link
                 key={social.name}
                 href={social.href}
-                className="text-[#057fa5] hover:text-white transition-all hover:scale-110"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#057fa5] hover:text-[#011425] transition-all hover:scale-125"
                 aria-label={social.name}
               >
                 {social.svg}
@@ -266,10 +252,10 @@ export default function Footer() {
 
           <div className="flex gap-8 text-[12px] font-black uppercase tracking-[0.2em]">
             <Link href="#" className="hover:text-[#057fa5] transition-colors">
-              Privacy Policy
+              Privacy
             </Link>
             <Link href="#" className="hover:text-[#057fa5] transition-colors">
-              Cookie Policy
+              Cookies
             </Link>
           </div>
         </div>
