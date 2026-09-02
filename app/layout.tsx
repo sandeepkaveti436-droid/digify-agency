@@ -3,6 +3,7 @@ import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
+import { Analytics } from "@vercel/analytics/next"
 
 // 1. Initialize Fonts
 const manrope = Manrope({
@@ -43,6 +44,7 @@ export default function RootLayout({
         {/* Main wrapper to ensure footer stays at bottom */}
         <main className="flex-grow">{children}</main>
         <Footer />
+        <Analytics/>
       </body>
     </html>
   );
