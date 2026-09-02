@@ -99,13 +99,13 @@ export default function PremiumPortfolio() {
             variants={blurSlip}
             className="space-y-4"
           >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-gray-100 bg-gray-50">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-gray-100 bg-gray-50">
               <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg">
+              <div className="absolute top-6 right-6 w-10 h-10 rounded-[18px] bg-white flex items-center justify-center shadow-lg">
                 <ArrowUpRight size={18} className="text-[#011425]" />
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function PremiumPortfolio() {
           className="flex flex-col items-center justify-center py-10"
         >
           <button className="group flex flex-col items-center space-y-4">
-            <div className="w-12 h-12 bg-[#057fa5] rounded-full border border-gray-200 flex items-center justify-center active:bg-[#057fa5] transition-all">
+            <div className="w-12 h-12 bg-[#057fa5] rounded-[18px] border border-gray-200 flex items-center justify-center active:bg-[#057fa5] transition-all">
               <ArrowUpRight
                 size={24}
                 className="text-[#fff] active:text-white"
@@ -153,18 +153,18 @@ export default function PremiumPortfolio() {
           >
             {projects.map((project, idx) => (
               <div key={idx} className="relative shrink-0 w-[30vw] group">
-                <div className="relative aspect-[10/6] overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100">
+                <div className="relative aspect-[10/6] overflow-hidden rounded-[22px] bg-gray-50 border border-gray-100">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-[#011425]/10 group-hover:bg-[#057fa5]/20 transition-all duration-500 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 shadow-2xl flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-[18px] bg-white scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 shadow-2xl flex items-center justify-center">
                       <ArrowUpRight
                         size={28}
                         className="text-[#011425]"
-                        strokeWidth={2.5}
+                        strokeWidth={2}
                       />
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export default function PremiumPortfolio() {
             {/* View All Terminal - Desktop */}
             <div className="shrink-0 w-[30vw] flex flex-col items-center justify-center pb-20">
               <button className="group space-y-6">
-                <div className="w-24 h-24 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#011425] group-hover:border-[#011425] transition-all duration-500">
+                <div className="w-18 h-18 rounded-[18px] border border-gray-200 flex items-center justify-center group-hover:bg-[#057fa5] group-hover:border-[#057fa5] transition-all duration-500">
                   <ArrowUpRight
                     size={40}
                     className="text-[#011425] group-hover:text-white transition-colors"

@@ -1,232 +1,190 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { BrainCircuit, Sparkles, Globe2, Zap, Rocket } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { MoveDownRight, Layout, Code2, Users, Target } from "lucide-react";
+import { SplitText } from "@/src/animations/SplitText";
+import { BlurIn } from "@/src/animations/BlurIn";
 
-const blurSlip = {
-  hidden: { filter: "blur(12px)", opacity: 0, y: 20 },
+// --- Custom Animation for Cards ---
+const cardVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    filter: "blur(10px)",
+  },
   visible: (i: number) => ({
-    filter: "blur(0px)",
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      delay: i * 0.1,
-      duration: 0.8,
+      delay: 0.1 + i * 0.1,
+      duration: 0.6,
       ease: [0.21, 0.47, 0.32, 0.98] as const,
     },
   }),
 };
 
-const avatars = [
-  {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200",
-    x: -40,
-    y: -20,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200",
-    x: 60,
-    y: -50,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200",
-    x: 130,
-    y: 10,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200",
-    x: 10,
-    y: 70,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200",
-    x: 160,
-    y: 80,
-  },
-];
-
-// Duplicate avatars for a seamless loop
-const loopAvatars = [...avatars, ...avatars];
-
 export default function AboutSection() {
   return (
-    <section className="bg-white py-16 md:py-16 px-6 md:px-12 lg:px-16 overflow-hidden relative">
+    <section className="bg-[#F8FAFC] py-12 md:py-32 px-4 md:px-12 font-manrope overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* TOP ROW: Headline and Team Visuals */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-          <div className="lg:col-span-7 text-center lg:text-left">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={blurSlip}
-              custom={0}
-              className="text-[32px] md:text-[32px] font-extrabold text-[#0B1120] leading-[1.1] tracking-tight"
-            >
-              We are a creative <br />
-              collective that accelerates <br />
+        {/* --- 1. HEADER AREA --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-end mb-12 md:mb-20">
+          <div className="text-left">
+            <BlurIn delay={0.1}>
+              <span className="text-[#057fa5] font-bold uppercase tracking-widest text-[10px] md:text-[11px] mb-4 md:mb-6 block">
+                THE STUDIO
+              </span>
+            </BlurIn>
+            <h2 className="text-[28px] md:text-[32px] font-extrabold text-[#011425] leading-[1.2] md:leading-[1.1] tracking-tight">
+              <SplitText text="Engineering products" delay={0.2} />
               <span className="font-serif italic font-light text-[#057fa5]">
-                growth
+                {" "}
+                that scale businesses.
               </span>
-            </motion.h2>
+            </h2>
           </div>
 
-          <div className="lg:col-span-5 relative">
-            {/* Background Stat */}
-            <div className="text-center mb-14 lg:mb-0">
-              <span className="text-[100px] md:text-[140px] font-black text-[#0B1120]/5 leading-none">
-                55+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="lg:pb-2"
+          >
+            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-xl font-medium">
+              Digify is a high-performance digital agency. We bridge the gap
+              between elite{" "}
+              <span className="text-[#011425] font-bold">visual identity</span>{" "}
+              and complex{" "}
+              <span className="text-[#011425] font-bold">
+                technical engineering
               </span>
-              <p className="text-[12px] font-bold text-[#64748B] uppercase tracking-widest -mt-4">
-                Team members
-              </p>
-            </div>
-
-            {/* MOBILE ONLY: Infinite Looping Slider */}
-            <div className="lg:hidden relative w-full overflow-hidden mt-4">
-              <motion.div
-                className="flex gap-4 w-fit"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              >
-                {loopAvatars.map((avatar, i) => (
-                  <div
-                    key={i}
-                    className="w-24 h-24 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border-2 border-gray-50"
-                  >
-                    <img
-                      src={avatar.src}
-                      className="w-full h-full object-cover"
-                      alt="team"
-                    />
-                  </div>
-                ))}
-              </motion.div>
-              {/* Subtle gradient fades on edges */}
-              <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent z-10" />
-            </div>
-
-            {/* DESKTOP ONLY: Scattered Cluster Layout */}
-            <div className="hidden lg:block absolute inset-0 pointer-events-none">
-              {avatars.map((avatar, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
-                  className="absolute w-20 h-20 rounded-full border-4 border-white shadow-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 pointer-events-auto"
-                  style={{
-                    left: `calc(50% + ${avatar.x}px)`,
-                    top: `calc(50% + ${avatar.y}px)`,
-                  }}
-                >
-                  <img
-                    src={avatar.src}
-                    className="w-full h-full object-cover"
-                    alt="team"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* MIDDLE ROW: Info Cards (Centered on Mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
-          <motion.div
-            custom={1}
-            variants={blurSlip}
-            initial="hidden"
-            whileInView="visible"
-            className="text-center md:text-left space-y-4"
-          >
-            <div className="w-10 h-10 mx-auto md:mx-0 rounded-xl bg-[#057fa5]/5 flex items-center justify-center">
-              <Rocket className="text-[#057fa5]" size={20} />
-            </div>
-            <h3 className="text-xl font-bold text-[#0B1120]">
-              Strategic Velocity
-            </h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              We bridge the gap between high-end design and engineering to ship
-              products that lead markets.
+              .
             </p>
-          </motion.div>
-
-          <motion.div
-            custom={2}
-            variants={blurSlip}
-            initial="hidden"
-            whileInView="visible"
-            className="text-center md:text-left space-y-4"
-          >
-            <div className="w-10 h-10 mx-auto md:mx-0 rounded-xl bg-[#057fa5]/5 flex items-center justify-center">
-              <Globe2 className="text-[#057fa5]" size={20} />
-            </div>
-            <h3 className="text-xl font-bold text-[#0B1120]">Global Team</h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              Our team operates globally to understand your market and users on
-              a deeper level.
-            </p>
-          </motion.div>
-
-          <motion.div
-            custom={3}
-            variants={blurSlip}
-            initial="hidden"
-            whileInView="visible"
-            className="bg-gray-50/80 p-6 md:mt-12 rounded-[2rem] border border-gray-100 flex flex-col items-center md:items-start gap-4"
-          >
-            <p className="text-[12px] font-bold text-[#057fa5] uppercase tracking-widest">
-              Learn about us with AI
-            </p>
-            <div className="flex gap-3">
-              {[BrainCircuit, Sparkles, Zap].map((Icon, i) => (
-                <div
-                  key={i}
-                  className="w-10 h-10 rounded-full bg-[#057fa5] shadow-sm flex items-center justify-center border border-gray-100 text-[#fff] hover:bg-[#057fa5] hover:text-white transition-all cursor-pointer"
-                >
-                  <Icon size={18} />
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
 
-        {/* BOTTOM ROW: Logos and Stats */}
-        <div className="pt-10 border-t border-gray-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-8 flex flex-wrap gap-8 justify-center lg:justify-start opacity-90">
-            <span className="font-black text-xl text-[#057fa5]">WORDPRESS</span>
-            <span className="font-bold text-xl text-[#057fa5]">INTERPREFY</span>
-            <span className="font-black text-xl text-[#057fa5]">
-              BLOCKWORKS
-            </span>
-          </div>
-          <div className="lg:col-span-4 flex justify-around lg:justify-end gap-12 text-center">
-            <div>
-              <p className="text-[12px] font-bold text-[#64748B] uppercase mb-1">
-                Our clients raised
-              </p>
-              <h4 className="text-2xl font-black text-[#0B1120] tracking-tight">
-                $1B+
-              </h4>
+        {/* --- 2. VALUE GRID (Adjusted Spacing for Mobile) --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24">
+          <FeatureCard
+            icon={<Layout size={22} />}
+            title="UI/UX Design"
+            desc="Conversion-first interfaces built on behavioral psychology."
+            index={0}
+          />
+          <FeatureCard
+            icon={<Code2 size={22} />}
+            title="Development"
+            desc="Scalable, secure code architectures using modern tech stacks."
+            index={1}
+          />
+          <FeatureCard
+            icon={<Target size={22} />}
+            title="Product Strategy"
+            desc="Data-driven roadmaps to navigate digital landscapes."
+            index={2}
+          />
+          <FeatureCard
+            icon={<Users size={22} />}
+            title="Consulting"
+            desc="Acting as a dedicated technical extension of your team."
+            index={3}
+          />
+        </div>
+
+        {/* --- 3. THE EXPERIENCE PANEL (Fixed Mobile Alignment) --- */}
+        <div className="relative group rounded-[2rem] md:rounded-[2.5rem] overflow-hidden aspect-[1/1] sm:aspect-[16/9] md:aspect-[21/8] shadow-2xl border border-gray-100">
+          <Image
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070"
+            alt="Collaboration"
+            fill
+            className="object-cover transition-transform duration-1000 grayscale-[0.2]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#011425]/60 to-transparent md:bg-gradient-to-r" />
+
+          {/* Internal floating stat card - Adjusted for Mobile Center */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
+            className="absolute bottom-4 left-4 right-4 md:bottom-10 md:right-10 md:left-auto bg-white/95 backdrop-blur-xl p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl border border-white/40 max-w-full md:max-w-[300px]"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#057fa5] shadow-[0_0_10px_#057fa5]" />
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Global Reach
+              </span>
             </div>
-            <div>
-              <p className="text-[12px] font-bold text-[#64748B] uppercase mb-1">
-                Partnerships
-              </p>
-              <h4 className="text-2xl font-black text-[#0B1120] tracking-tight">
-                320+
-              </h4>
-            </div>
+            <h4 className="text-3xl md:text-4xl font-black text-[#011425] mb-2 tracking-tighter">
+              $1.4B+
+            </h4>
+            <p className="text-[10px] md:text-[11px] font-bold text-gray-500 uppercase leading-normal tracking-tight">
+              Total funding raised by our clients through design.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* --- 4. CALL TO ACTION --- */}
+        <div className="mt-16 md:mt-20 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-gray-200 pt-12 md:pt-16">
+          <div className="text-center md:text-left">
+            <h4 className="text-xl md:text-2xl font-extrabold text-[#011425]">
+              Ready to build your legacy?
+            </h4>
+            <p className="text-sm md:text-base text-gray-500 font-medium mt-1">
+              Discuss how we can engineer your growth.
+            </p>
           </div>
+
+          {/* Leaf & Pill Button - Scaled for Mobile */}
+          <Link href="/contact" className="group flex items-center gap-2">
+            <div className="bg-[#057fa5] w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] transition-all duration-500 group-hover:rotate-45 shadow-lg shadow-[#057fa5]/20">
+              <MoveDownRight size={22} className="text-white md:hidden" />
+              <MoveDownRight size={28} className="text-white hidden md:block" />
+            </div>
+            <div className="bg-[#057fa5] h-10 md:h-16 px-6 md:px-6 flex items-center justify-center rounded-full transition-all duration-500 group-hover:bg-[#011425] shadow-lg shadow-[#057fa5]/10">
+              <span className="text-white font-bold text-[16px] md:text-[16px] tracking-widest uppercase">
+                Start Project
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </section>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  desc,
+  index,
+}: {
+  icon: any;
+  title: string;
+  desc: string;
+  index: number;
+}) {
+  return (
+    <motion.div
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="bg-white p-6 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500"
+    >
+      <div className="text-[#057fa5] mb-6 inline-block p-3 bg-[#057fa5]/5 rounded-xl group-hover:bg-[#057fa5] group-hover:text-white transition-colors duration-500">
+        {icon}
+      </div>
+      <h3 className="text-lg md:text-xl font-bold text-[#011425] mb-3">
+        {title}
+      </h3>
+      <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+        {desc}
+      </p>
+    </motion.div>
   );
 }

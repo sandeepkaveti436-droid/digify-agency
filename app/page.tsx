@@ -6,7 +6,6 @@ import TestimonialSection from "@/src/components/TestimonialSection";
 import ProcessSection from "@/src/components/ProcessSection";
 import FAQSection from "@/src/components/FAQSection";
 import BlogSection from "@/src/components/BlogSection";
-import Footer from "@/src/components/Footer";
 
 export default function Home() {
   return (
@@ -19,7 +18,7 @@ export default function Home() {
       <ProcessSection />
       <FAQSection />
       <BlogSection/>
-      <Footer />
+  
     </main>
   );
 }

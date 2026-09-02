@@ -11,8 +11,7 @@ const blogPosts = [
     title: "How Premium UI/UX Design Accelerates SaaS Growth in 2024",
     date: "Oct 12, 2024",
     readTime: "5 min read",
-    image:
-      "/img-1.png",
+    image: "/img-1.png",
     featured: true,
   },
   {
@@ -64,7 +63,7 @@ export default function BlogSection() {
               whileInView="visible"
               variants={blurSlip}
               custom={0}
-              className="text-[#2563EB] font-black uppercase tracking-[0.3em] text-[12px] block mb-4"
+              className="text-[#057fa5] font-black uppercase tracking-[0.3em] text-[12px] block mb-4"
             >
               Latest Intelligence
             </motion.span>
@@ -73,10 +72,10 @@ export default function BlogSection() {
               whileInView="visible"
               variants={blurSlip}
               custom={1}
-              className="text-[32px] md:text-[54px] font-extrabold text-[#011425] leading-[1.1] tracking-tight"
+              className="text-[20px] md:text-[32px] font-extrabold text-[#000] leading-[1.1] tracking-tight"
             >
               Insights on{" "}
-              <span className="font-serif italic font-light text-[#2563EB]">
+              <span className="font-serif italic font-light text-[#057fa5]">
                 Product & Design
               </span>
             </motion.h2>
@@ -84,7 +83,7 @@ export default function BlogSection() {
           <motion.button
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="group flex items-center gap-2 text-[#011425] font-bold text-sm border-b-2 border-[#2563EB] pb-1"
+            className="group flex items-center gap-2 text-[#011425] font-bold text-sm border-b-2 border-[#057fa5] pb-1"
           >
             View all articles{" "}
             <ArrowUpRight
@@ -110,7 +109,7 @@ export default function BlogSection() {
                 alt={blogPosts[0].title}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               />
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black text-[#2563EB] uppercase tracking-widest">
+              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[14px] font-black text-[#057fa5] uppercase tracking-widest">
                 {blogPosts[0].category}
               </div>
             </div>
@@ -123,7 +122,7 @@ export default function BlogSection() {
                   <Clock size={14} /> {blogPosts[0].readTime}
                 </span>
               </div>
-              <h3 className="text-2xl md:text-4xl font-extrabold text-[#011425] leading-tight group-hover:text-[#2563EB] transition-colors">
+              <h3 className="text-[20px] md:text-[32px] font-extrabold text-[#011425] leading-tight group-hover:text-[#057fa5] transition-colors">
                 {blogPosts[0].title}
               </h3>
             </div>
@@ -150,13 +149,13 @@ export default function BlogSection() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <span className="text-[10px] font-black text-[#2563EB] uppercase tracking-widest">
+                    <span className="text-[14px] font-black text-[#057fa5] uppercase tracking-widest">
                       {post.category}
                     </span>
-                    <h4 className="text-lg md:text-xl font-bold text-[#011425] leading-snug group-hover:text-[#2563EB] transition-colors line-clamp-3">
+                    <h4 className="text-[16px] md:text-[20px] font-bold text-[#000] leading-snug group-hover:text-[#057fa5] transition-colors line-clamp-3">
                       {post.title}
                     </h4>
-                    <div className="flex items-center gap-4 text-gray-400 text-[10px] font-bold uppercase tracking-tighter">
+                    <div className="flex items-center gap-4 text-gray-400 text-[14px] font-bold uppercase tracking-tighter">
                       <span>{post.date}</span>
                       <span>•</span>
                       <span>{post.readTime}</span>
