@@ -285,7 +285,7 @@ export default function Navbar() {
         <Link href="/" className="z-[110]">
           <div className="lg:hidden">
             <Image
-              src="/logo/Mask group.png"
+              src="/logo/mobile-2.png"
               alt="Mobile Logo"
               width={28}
               height={28}
