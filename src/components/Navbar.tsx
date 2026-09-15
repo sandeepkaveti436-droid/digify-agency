@@ -308,7 +308,7 @@ export default function Navbar() {
         {/* DESKTOP LINKS */}
         <div className="hidden lg:flex items-center gap-10">
           <Link
-            href="/works"
+            href="/allworks"
             className="font-bold text-[15px] text-[#011425] hover:text-[#057fa5] transition-colors"
           >
             Works
