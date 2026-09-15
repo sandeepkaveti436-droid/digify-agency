@@ -16,8 +16,7 @@ const projects = [
     slug: "orvixas",
     liveUrl: "https://orvixas.vercel.app/",
     // A modern, high-end agency/marketing visual
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    image: "../../website/orvix.png",
   },
   {
     id: "02",
@@ -28,8 +27,7 @@ const projects = [
     slug: "skynova",
     liveUrl: "https://skynovadigitals.vercel.app/",
     // A futuristic, tech-focused digital studio visual
-    image:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1200&auto=format&fit=crop",
+    image: "../../website/snd.png",
   },
   {
     id: "03",
@@ -40,8 +38,7 @@ const projects = [
     slug: "hr-admin",
     liveUrl: "https://hradmin-staffmanagement.vercel.app/",
     // A clean, analytical dashboard/management visual
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    image: "../../website/hr.png",
   },
   {
     id: "04",
@@ -52,8 +49,7 @@ const projects = [
     slug: "aura-yoga",
     liveUrl: "https://auraflow-yoga.vercel.app/",
     // A serene, minimalist wellness/yoga visual
-    image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop",
+    image: "../../website/yoga.png",
   },
 ];
 

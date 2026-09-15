@@ -25,7 +25,6 @@ export default function AllWorksPage() {
   return (
     <main className="bg-white min-h-screen pt-32 pb-20 px-6 md:px-12 lg:px-24 font-manrope">
       <div className="max-w-[1440px] mx-auto">
-
         {/* Title Section */}
         <div className="mb-24">
           <h1 className="text-6xl md:text-[60px] font-black tracking-tighter text-[#011425] leading-[0.85] uppercase">
@@ -61,6 +60,8 @@ export default function AllWorksPage() {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
 
@@ -69,6 +70,7 @@ export default function AllWorksPage() {
                   {/* Case Study Link (Internal) */}
                   <Link
                     href={`/works/${project.slug}`}
+                    aria-label={`View case study for ${project.title}`}
                     className="bg-white text-[#011425] p-3.5 rounded-full hover:bg-[#057fa5] hover:text-white transition-all transform hover:scale-110 shadow-xl"
                   >
                     <FileText size={20} />
@@ -79,6 +81,7 @@ export default function AllWorksPage() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Open live website for ${project.title}`}
                     onClick={(e) => e.stopPropagation()} // Prevent bubbling up to any potential parent link
                     className="bg-[#D4FF00] text-[#011425] p-3.5 rounded-full hover:bg-white transition-all transform hover:scale-110 shadow-xl"
                   >
