@@ -1,209 +1,186 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, ExternalLink, FileText } from "lucide-react";
+import Link from "next/link";
 
+// --- 1. UPDATED DATA WITH THEME-SPECIFIC IMAGES ---
 const projects = [
   {
     id: "01",
-    title: "Quantum",
-    serif: "Dynamics",
-    category: "Fintech Interface",
+    title: "Orvixas",
+    serif: "Agency",
+    category: "Digital Agency",
     year: "2024",
+    slug: "orvixas",
+    liveUrl: "https://orvixas.vercel.app/",
+    // A modern, high-end agency/marketing visual
     image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "02",
-    title: "Aura",
-    serif: "Skincare",
-    category: "Brand Identity",
-    year: "2023",
+    title: "SkyNova",
+    serif: "Digitals",
+    category: "Digital Studio",
+    year: "2024",
+    slug: "skynova",
+    liveUrl: "https://skynovadigitals.vercel.app/",
+    // A futuristic, tech-focused digital studio visual
     image:
-      "https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1200",
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "03",
-    title: "Nexus",
-    serif: "Robotics",
-    category: "Industrial UI/UX",
+    title: "Staff",
+    serif: "Management",
+    category: "HR Admin Dashboard",
     year: "2024",
+    slug: "hr-admin",
+    liveUrl: "https://hradmin-staffmanagement.vercel.app/",
+    // A clean, analytical dashboard/management visual
     image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "04",
-    title: "Starlight",
-    serif: "Media",
-    category: "Streaming UI",
-    year: "2023",
+    title: "Aura Flow",
+    serif: "Yoga",
+    category: "Wellness Platform",
+    year: "2024",
+    slug: "aura-yoga",
+    liveUrl: "https://auraflow-yoga.vercel.app/",
+    // A serene, minimalist wellness/yoga visual
     image:
-      "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=1200",
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
-const blurSlip = {
-  hidden: { filter: "blur(12px)", opacity: 0, y: 25 },
-  visible: {
-    filter: "blur(0px)",
+const fadeUp = {
+  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] as const },
-  },
+    filter: "blur(0px)",
+    transition: {
+      delay: i * 0.1,
+      duration: 0.8,
+      ease: [0.21, 0.47, 0.32, 0.98] as const,
+    },
+  }),
 };
 
 export default function PremiumPortfolio() {
-  const targetRef = useRef<HTMLDivElement | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
-
   return (
-    <section className="bg-white">
-      {/* 1. Centered Header */}
-      <div className="pt-20 pb-8 px-6 md:px-12 lg:px-24 text-center">
+    <section className="bg-white py-24 px-6 md:px-12 lg:px-24 font-manrope">
+      {/* 1. Header Section */}
+      <div className="text-center mb-16">
         <motion.span
-          initial="hidden"
-          whileInView="visible"
-          variants={blurSlip}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           className="text-[#057fa5] font-bold tracking-[0.4em] uppercase text-[12px] block mb-2"
         >
-          Selected Works
+          Featured Cases
         </motion.span>
         <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          variants={blurSlip}
-          className="text-[20px] md:text-[32px] font-extrabold text-[#011425] leading-[1.1] tracking-tight max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-[32px] md:text-[42px] font-extrabold text-[#011425] leading-[1.2] tracking-tight max-w-4xl mx-auto uppercase"
         >
-          Elevating digital <br />
-          standards through{" "}
-          <span className="font-serif italic font-light text-[#057fa5]">
-            Design
+          Transforming vision into <br /> high-performance{" "}
+          <span className="font-serif italic font-light text-[#057fa5] lowercase">
+            products
           </span>
         </motion.h2>
       </div>
 
-      {/* 2. MOBILE VIEW: Line-wise Vertical Stack */}
-      <div className="flex flex-col lg:hidden px-6 pb-20 gap-12">
+      {/* 2. Responsive Grid Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
         {projects.map((project, idx) => (
           <motion.div
-            key={idx}
+            key={project.id}
+            custom={idx}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={blurSlip}
-            className="space-y-4"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="flex flex-col group"
           >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] border border-gray-100 bg-gray-50">
+            {/* Card Image Area */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-gray-50 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
-              <div className="absolute top-6 right-6 w-10 h-10 rounded-[18px] bg-white flex items-center justify-center shadow-lg">
-                <ArrowUpRight size={18} className="text-[#011425]" />
+
+              {/* Simplified Hover Overlay */}
+              <div className="absolute inset-0 bg-[#011425]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                {/* Internal Case Study Link */}
+                <Link
+                  href={`/works/${project.slug}`}
+                  className="bg-white text-[#011425] p-4 rounded-full hover:bg-[#057fa5] hover:text-white transition-all transform hover:scale-110 shadow-xl"
+                  title="View Case Study"
+                >
+                  <FileText size={22} />
+                </Link>
+
+                {/* External Live Site Link */}
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#D4FF00] text-[#011425] p-4 rounded-full hover:bg-white transition-all transform hover:scale-110 shadow-xl"
+                  title="Visit Live Website"
+                >
+                  <ExternalLink size={22} />
+                </a>
               </div>
             </div>
-            <div className="space-y-1">
-              <span className="text-[12px] font-bold text-[#057fa5] tracking-widest uppercase">
+
+            {/* Project Details */}
+            <div className="mt-6 space-y-1">
+              <span className="text-[10px] font-bold text-[#057fa5] tracking-widest uppercase">
                 {project.category}
               </span>
-              <h3 className="text-[20px] font-bold text-[#011425]">
-                {project.title}{" "}
-                <span className="font-serif italic font-light text-[#057fa5]">
-                  {project.serif}
+              <Link href={`/works/${project.slug}`}>
+                <h3 className="text-[22px] font-bold text-[#011425] hover:text-[#057fa5] transition-colors leading-tight">
+                  {project.title}{" "}
+                  <span className="font-serif italic font-light">
+                    {project.serif}
+                  </span>
+                </h3>
+              </Link>
+              <div className="flex justify-between items-center pt-2">
+                <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">
+                  {project.year}
                 </span>
-              </h3>
+                <Link
+                  href={`/works/${project.slug}`}
+                  className="text-[10px] font-black text-[#011425] uppercase tracking-widest border-b border-gray-200 hover:border-[#057fa5] transition-all"
+                >
+                  See Case Study
+                </Link>
+              </div>
             </div>
           </motion.div>
         ))}
-
-        {/* MOBILE VIEW ALL BUTTON - Added here */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          variants={blurSlip}
-          className="flex flex-col items-center justify-center py-10"
-        >
-          <button className="group flex flex-col items-center space-y-4">
-            <div className="w-12 h-12 bg-[#057fa5] rounded-[18px] border border-gray-200 flex items-center justify-center active:bg-[#057fa5] transition-all">
-              <ArrowUpRight
-                size={24}
-                className="text-[#fff] active:text-white"
-              />
-            </div>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#011425]">
-              See All Case Studies
-            </p>
-          </button>
-        </motion.div>
       </div>
 
-      {/* 3. DESKTOP VIEW: Cinematic Horizontal */}
-      <div ref={targetRef} className="hidden lg:block relative h-[300vh]">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div
-            style={{ x }}
-            className="flex items-end gap-12 mb-40 px-12"
-          >
-            {projects.map((project, idx) => (
-              <div key={idx} className="relative shrink-0 w-[30vw] group">
-                <div className="relative aspect-[10/6] overflow-hidden rounded-[22px] bg-gray-50 border border-gray-100">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-[#011425]/10 group-hover:bg-[#057fa5]/20 transition-all duration-500 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-[18px] bg-white scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 shadow-2xl flex items-center justify-center">
-                      <ArrowUpRight
-                        size={28}
-                        className="text-[#011425]"
-                        strokeWidth={2}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 flex justify-between items-start">
-                  <div>
-                    <span className="text-[12px] font-bold text-[#057fa5] tracking-widest uppercase">
-                      {project.category}
-                    </span>
-                    <h3 className="text-[20px] font-extrabold text-[#011425] mt-2 transition-transform group-hover:translate-x-2">
-                      {project.title}{" "}
-                      <span className="font-serif italic font-light text-[#057fa5]">
-                        {project.serif}
-                      </span>
-                    </h3>
-                  </div>
-                  <span className="text-xs font-bold text-gray-300 mt-4">
-                    {project.year}
-                  </span>
-                </div>
-              </div>
-            ))}
-
-            {/* View All Terminal - Desktop */}
-            <div className="shrink-0 w-[30vw] flex flex-col items-center justify-center pb-20">
-              <button className="group space-y-6">
-                <div className="w-18 h-18 rounded-[18px] border border-gray-200 flex items-center justify-center group-hover:bg-[#057fa5] group-hover:border-[#057fa5] transition-all duration-500">
-                  <ArrowUpRight
-                    size={40}
-                    className="text-[#011425] group-hover:text-white transition-colors"
-                  />
-                </div>
-                <p className="text-sm font-bold uppercase tracking-[0.4em] text-[#011425]">
-                  See All Case Studies
-                </p>
-              </button>
-            </div>
-          </motion.div>
-        </div>
+      {/* 3. View All Button Section */}
+      <div className="flex flex-col items-center">
+        <Link
+          href="/allworks"
+          className="group flex flex-col items-center gap-4"
+        >
+          <div className="w-14 h-14 rounded-[22px] bg-[#057fa5] flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:rotate-45">
+            <ArrowUpRight size={28} className="text-white" />
+          </div>
+          <p className="text-[11px] font-black uppercase tracking-[0.4em] text-[#011425] text-center">
+            View All <br /> Collections
+          </p>
+        </Link>
       </div>
     </section>
   );

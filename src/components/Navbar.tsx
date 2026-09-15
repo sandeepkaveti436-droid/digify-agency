@@ -285,20 +285,20 @@ export default function Navbar() {
         <Link href="/" className="z-[110]">
           <div className="lg:hidden">
             <Image
-              src="/logo/mobile-2.png"
+              src="/logo/Mask group.png"
               alt="Mobile Logo"
-              width={32}
-              height={32}
+              width={28}
+              height={28}
               priority
               className="w-auto h-8"
             />
           </div>
           <div className="hidden lg:block">
             <Image
-              src="/logo/DA-1.png"
+              src="/logo/Mask group.png"
               alt="Logo"
-              width={150}
-              height={50}
+              width={120}
+              height={40}
               priority
               className="w-auto h-8 md:h-10"
             />
